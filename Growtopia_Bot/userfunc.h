@@ -74,18 +74,22 @@ string generateRid()
 void GrowtopiaBot::onLoginRequested()
 {
 	cout << "Logging on..." << endl;
-	string token;
-	if (!login_user&&!login_token)
+	string ltoken;
+	if (!login_user && !login_token)
 	{
-		token = "";
+		ltoken = "";
 	}
 	else {
-		token = "\nuser|" + std::to_string(login_user) + "\ntoken|" + std::to_string(login_token);
+		// Build ltoken from user and token (you may need to encrypt/encode this properly)
+		ltoken = ""; // TODO: Implement proper ltoken generation from login_user and login_token
 	}
     string ver = gameVersion;
 	string hash = std::to_string((unsigned int)rand());
 	string hash2 = std::to_string((unsigned int)rand());
-	SendPacket(2, "tankIDName|" + uname + "\ntankIDPass|" + upass + "\nrequestedName|SmileZero\nf|0\nprotocol|38\ngame_version|" + ver + "\nfz|13812200\nlmode|0\ncbits|0\nhash2|"+hash2+"\nmeta|" + generateMeta() + "\nfhash|-716928004\nrid|" + generateRid() + "\nplatformID|0\ndeviceVersion|0\ncountry|cz\nhash|" + hash + "\nmac|" + generateMac() + "\nwk|" + generateRid() + "\nzf|13837395" + token, peer);
+	
+	// New login method using ltoken
+	SendPacket(2, "ltoken|" + ltoken + "\nplatformID|4\nadc|1\nrequestedName|\nf|1\nprotocol|225\ngame_version|" + ver + "\ncbits|1024\nplayer_age|25\nGDPR|1\nFCMToken|c5S6lBZZSMCVzkwFBrBVHt:APA91bG2idykRmLBCu0CZ2tNtjHlLpCVMM_wwNb3FpNkicG7I-U0-SKR-lUbIBrx4V0nNkAzmx3Y7Ep2-Z7l1wNssaFCjc_HDDLbzjqMwtI-JtwVvQFWcpY\ncategory|_-5100\ntotalPlaytime|0\nklv|5E472A43FA7C55AFA674662E29BADCEF\ngid|1b2a8f87-6af3-46d7-b857-d606f5aed02c\ntr|4322\nmeta|" + generateMeta() + "\nfhash|-716928004\nrid|" + generateRid() + "\nplatformID|4\ndeviceVersion|0\ncountry|id\nhash|" + hash + "\nmac|" + generateMac() + "\nwk|NONE0\nlmode|1\nuser|" + std::to_string(login_user) + "\ntoken|" + std::to_string(login_token) + "\nUUIDToken|0265962F543533B10AEC89F2AAE84D01\ndoorID|0\naat|2\n", peer);
+	
 	//SendPacket(3, "action|quit", peer);
 	//SendPacket(2, "testasdf", peer);
 	//SendPacket(2, "action|enter_game\n", peer);
