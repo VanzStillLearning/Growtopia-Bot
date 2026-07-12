@@ -30,8 +30,8 @@ echo -e "${YELLOW}[2/5] Installing dependencies...${NC}"
 pkg install -y \
     build-essential \
     cmake \
-    qt6-base \
-    qt6-tools \
+    qt6-qtbase \
+    qt6-qttools \
     clang \
     git \
     pkg-config
